@@ -23,8 +23,13 @@ exports.commands = {
       message.channel.send(user.fname + " " + user.lname + " " + user.nickname + " " + user.lineage + " " +user.reference)
     })
   },
-  insertUser: function(firstName,lastName,nickname,lineage,reference){
-
+  createUser: function(userStringWithOrOperandAsSplitter){
+    var firstName;
+    var lastName;
+    var lineage;
+    var reference;
+    var nickname;
+    [firstName, lastName, lineage, reference, nickname] =  userStringWithOrOperandAsSplitter.split("|");
     user = { 'fname':firstName,'lname':lastName,'lineage':lineage,'reference':reference,'nickname':nickname}
     return user;
     //push to MongoDB

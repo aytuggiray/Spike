@@ -11,7 +11,10 @@ const prefix = "-"
 let songCommands = require('./components/lyric.js').commands;
 let tipCommands = require('./components/tip.js').commands;
 let usersCommands = require('./components/users.js').commands;
-
+let obj = { 'songCommands': songCommands,
+            'tipCommands': tipCommands,
+            'usersCommands': usersCommands
+          }
 var Users;
 
 Mongo.connect(url, function(err,db){
@@ -39,6 +42,24 @@ bot.on('error',(err)=>{
 
 // ~# St.
 bot.on('message',function(message){
+  var messagePrefix = message.content.substring(0,1);
+  var messageContent = message.content.substring(1,message.content.indexOf(" "));
+  var messageParameters = message.content.substring(message.content.indexOf(" ")+1, message.content.length);
+  if (messagePrefix === prefix) {
+    switch(messageContent){
+      default:
+        message.channel.send("Type \"-help\" for help ");
+        break;
+      case "help":
+        var helpMessage = createHelpMessage();
+        message.channel.send(helpMessage);
+        break;
+      case "createUser":
+        //format fname|lname|lineage|reference|nickname
+        usersCommands.createUser(messageParameters)
+    }
+  }
+    /*
     //usersCommands
     (message.content===prefix+"printUsers") ? usersCommands.printUsers(Users, message) : null;
     if(message.content.substring(0,"insertUser".length+1)===prefix+"insertUser"){
@@ -53,7 +74,7 @@ bot.on('message',function(message){
       params.map(function(item,index){
         console.log(item)
       })
-      */
+
       Mongo.connect(url, function(err,db){
         db.collection("Users").insertOne(usersCommands.insertUser(firstName,lastName,nickname,lineage,reference), function(err,res){
           console.log("Record created")
@@ -61,12 +82,12 @@ bot.on('message',function(message){
         })
       })
     }
+    */
 });
 
-
-
-
-
+var createHelpMessage = () => {
+  var message = "Hi, we don't have a help message yet!";
+}
 
 // ~# Login
 bot.login(TOKEN);
