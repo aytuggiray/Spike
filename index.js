@@ -3,7 +3,7 @@ const bot = new Discord.Client();
 const Mongo = require('mongodb').MongoClient,
   test = require('assert');
 var url = 'mongodb://localhost:27017/test'
-var TOKEN = require('./config.json')
+var TOKEN = require('./config.json').token;
 var db;
 
 const prefix = "-"
