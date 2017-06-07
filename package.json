@@ -1,0 +1,15 @@
+{
+  "name": "SpikeBot",
+  "description": "Spike Bot",
+  "version": "0.1.0",
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/aytuggiray/Spike"
+    }
+  ],
+  "dependencies":{
+    "discord.js": "^11.1.0",
+    "mongodb":"^2.2.19"
+  }
+}
