@@ -43,9 +43,10 @@ bot.on('error',(err)=>{
 // ~# St.
 bot.on('message',function(message){
   var messagePrefix = message.content.substring(0,1);
-  var messageContent = message.content.substring(1,message.content.indexOf(" "));
-  var messageParameters = message.content.substring(message.content.indexOf(" ")+1, message.content.length);
-  if (messagePrefix === prefix) {
+  var messageContent = message.content.substring(1,(message.content.indexOf(" ")!==-1) ? message.content.indexOf(" ") : message.content.length);
+  var messageParameters = message.content.substring((message.content.indexOf(" ")!==-1) ? message.content.indexOf(" ") : message.content.length, message.content.length);
+  console.log(message.content)
+  if ((messagePrefix === prefix) && !(message.author.equals(bot.user))) {
     switch(messageContent){
       default:
         message.channel.send("Type \"-help\" for help ");
@@ -87,6 +88,7 @@ bot.on('message',function(message){
 
 var createHelpMessage = () => {
   var message = "Hi, we don't have a help message yet!";
+  return message;
 }
 
 // ~# Login
