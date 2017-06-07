@@ -1,36 +1,43 @@
 var user = {
-  'fname':null,
-  'lname':null,
-  'nickname':null,
-  'lineage':null,
-  'reference':null
+  //'_id': null,
+  'fname': null,
+  'lname': null,
+  'nickname': null,
+  'lineage': null,
+  'reference': null
 }
 var prefix = "-";
 exports.commands = {
-  ping: function(bot,message) {
-    (message.content===prefix+"ping") ? message.channel.send("ping function PONG") : null;
+  ping: function(bot, message) {
+    (message.content === prefix + "ping") ? message.channel.send("ping function PONG"): null;
   },
   addTip: function(message) {
-    if(message.content === prefix+"ping"){
+    if (message.content === prefix + "ping") {
       message.channel.send("addTip function PONG");
     } else {
       null
     }
   },
-  printUsers: function(Users, message){
+  printUsers: function(Users, message) {
     //message.channel.send(Users);
-    Users.map(function(user,index){
-      message.channel.send(user.fname + " " + user.lname + " " + user.nickname + " " + user.lineage + " " +user.reference)
+    Users.map(function(user, index) {
+      message.channel.send(user.fname + " " + user.lname + " " + user.nickname + " " + user.lineage + " " + user.reference)
     })
   },
-  createUser: function(userStringWithOrOperandAsSplitter){
+  createUser: function(userStringWithOrOperandAsSplitter) {
     var firstName;
     var lastName;
     var lineage;
     var reference;
     var nickname;
-    [firstName, lastName, lineage, reference, nickname] =  userStringWithOrOperandAsSplitter.split("|");
-    user = { 'fname':firstName,'lname':lastName,'lineage':lineage,'reference':reference,'nickname':nickname}
+    [firstName, lastName, lineage, reference, nickname] = userStringWithOrOperandAsSplitter.split("|");
+    user = {
+      'fname': firstName,
+      'lname': lastName,
+      'lineage': lineage,
+      'reference': reference,
+      'nickname': nickname
+    }
     return user;
     //push to MongoDB
   }
